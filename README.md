@@ -153,3 +153,6 @@ TinyWinには、習慣を小さく始めたり、できなかった日を過度�
 バージョン間の違いやRenderへのデプロイに想定以上の時間がかかる可能性があります。また、Rails 8.1系のサポート状況は実装開始時に公式情報を再確認します。
 
 使用する技術やライブラリを必要最小限にし、まずはMVPの機能を優先します。Docker、通知、カレンダーUI、複雑なグラフなどはMVP完成後に必要性を検討。
+
+### 画面遷移図
+Figma：<https://www.figma.com/design/wQX6zHnQ8bqZAaQNcIH2U6/%E3%81%A1%E3%82%87%E3%81%84%E5%8B%95%E3%81%8D%EF%BD%9C%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E3%83%BB%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?node-id=0-1&t=RxvJFI69tIsSOpDB-1>
