@@ -8,3 +8,57 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+	color-scheme: light;
+	--color-ink: #20332f;
+	--color-muted: #61736e;
+	--color-accent: #267360;
+	--color-background: #f5f8f6;
+}
+
+body {
+	min-height: 100vh;
+	color: var(--color-ink);
+	background: var(--color-background);
+}
+
+.home-page {
+	display: grid;
+	min-height: 100vh;
+	place-items: center;
+	padding: 48px 24px;
+}
+
+.home-page__intro {
+	width: min(100%, 720px);
+	padding: 64px 32px;
+	border-left: 4px solid var(--color-accent);
+	background: #fff;
+}
+
+.home-page__eyebrow {
+	margin-bottom: 12px;
+	color: var(--color-accent);
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+.home-page h1 {
+	margin-bottom: 16px;
+	font-size: clamp(2.5rem, 8vw, 4.5rem);
+	font-weight: 800;
+}
+
+.home-page__description {
+	margin-bottom: 0;
+	color: var(--color-muted);
+	font-size: 1.1rem;
+	line-height: 1.8;
+}
+
+@media (max-width: 576px) {
+	.home-page__intro {
+		padding: 40px 24px;
+	}
+}
