@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare test database
+        run: docker compose run --build --rm -e RAILS_ENV=test web bin/rails db:prepare
+
+      - name: Run Minitest
+        run: docker compose run --rm -e RAILS_ENV=test web bin/rails test
+
+      - name: Run RuboCop
+        run: docker compose run --rm web bundle exec rubocop
+
+      - name: Stop Compose services
+        if: always()
+        run: docker compose down --volumes --remove-orphans
