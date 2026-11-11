@@ -9,6 +9,7 @@
 /storage/*
 !/storage/.keep
 /public/assets
+/coverage/
 /.byebug_history
 /config/master.key
 /config/credentials/*.key
