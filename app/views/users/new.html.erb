@@ -1,0 +1,40 @@
+<% content_for :title, t("users.new.title") %>
+
+<main class="registration-page">
+  <section class="registration-panel" aria-labelledby="registration-title">
+    <p class="registration-panel__eyebrow"><%= t("users.new.eyebrow") %></p>
+    <h1 id="registration-title"><%= t("users.new.title") %></h1>
+    <p class="registration-panel__description"><%= t("users.new.description") %></p>
+
+    <% if @user.errors.any? %>
+      <div class="registration-errors" role="alert" aria-labelledby="registration-errors-title">
+        <h2 id="registration-errors-title"><%= t("users.new.errors_heading") %></h2>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @user, class: "registration-form" do |form| %>
+      <div class="registration-form__field">
+        <%= form.label :email, t("activerecord.attributes.user.email") %>
+        <%= form.email_field :email, required: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="registration-form__field">
+        <%= form.label :password, t("activerecord.attributes.user.password") %>
+        <%= form.password_field :password, required: true, minlength: 8, autocomplete: "new-password", class: "form-control" %>
+        <p class="registration-form__hint"><%= t("users.new.password_hint") %></p>
+      </div>
+
+      <div class="registration-form__field">
+        <%= form.label :password_confirmation, t("activerecord.attributes.user.password_confirmation") %>
+        <%= form.password_field :password_confirmation, required: true, minlength: 8, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <%= form.submit t("users.new.submit"), class: "registration-submit" %>
+    <% end %>
+  </section>
+</main>
