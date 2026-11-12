@@ -9,6 +9,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[type=email][name='user[email]']"
     assert_select "input[type=password][name='user[password]']"
     assert_select "input[type=password][name='user[password_confirmation]']"
+    assert_select "a[href='#{login_path}']", "ログインに戻る"
   end
 
   test "creates a user, signs them in, and redirects to the home page" do

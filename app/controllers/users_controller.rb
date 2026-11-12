@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  skip_before_action :require_authentication, only: %i[ new create ]
+
 
   private
 

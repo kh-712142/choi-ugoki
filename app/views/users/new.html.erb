@@ -36,5 +36,7 @@
 
       <%= form.submit t("users.new.submit"), class: "registration-submit" %>
     <% end %>
+
+    <%= link_to t("users.new.login_link"), login_path, class: "registration-back-link" %>
   </section>
 </main>

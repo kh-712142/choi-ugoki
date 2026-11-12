@@ -5,6 +5,7 @@ ja:
     eyebrow: "小さく始める、今日の運動"
     title: "ちょい動き"
     description: "疲れて帰った日も、短い運動から始められるアプリです。"
+    logout: "ログアウト"
   users:
     new:
       eyebrow: "ちょい動きを始めましょう"
@@ -13,6 +14,16 @@ ja:
       errors_heading: "入力内容を確認してください"
       password_hint: "8文字以上"
       submit: "登録"
+      login_link: "ログインに戻る"
+  sessions:
+    new:
+      title: "ログイン"
+      email_placeholder: "メールアドレスを入力"
+      password_placeholder: "パスワードを入力"
+      submit: "ログイン"
+      signup_prompt: "アカウントをお持ちでない方"
+      signup_link: "新規登録"
+      invalid_credentials: "メールアドレスまたはパスワードが違います"
   activerecord:
     models:
       user: "ユーザー"
