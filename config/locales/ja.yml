@@ -5,3 +5,19 @@ ja:
     eyebrow: "小さく始める、今日の運動"
     title: "ちょい動き"
     description: "疲れて帰った日も、短い運動から始められるアプリです。"
+  users:
+    new:
+      eyebrow: "ちょい動きを始めましょう"
+      title: "アカウント新規登録"
+      description: "メールアドレスとパスワードを登録してください。"
+      errors_heading: "入力内容を確認してください"
+      password_hint: "8文字以上"
+      submit: "登録"
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
