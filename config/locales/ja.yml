@@ -13,6 +13,13 @@ ja:
       today: "今日"
       tasks: "タスク"
       history: "履歴"
+  tasks:
+    index:
+      title: "自分のタスク"
+      description: "自分で登録した運動タスク"
+      add: "タスクを追加"
+      back: "今日の画面へ戻る"
+      empty: "作成したタスクはまだありません"
   users:
     new:
       eyebrow: "ちょい動きを始めましょう"

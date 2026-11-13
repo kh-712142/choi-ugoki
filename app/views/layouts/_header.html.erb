@@ -5,7 +5,7 @@
 
       <nav class="site-header__navigation" aria-label="メインナビゲーション">
         <%= link_to t("layouts.header.today"), root_path, class: "site-header__nav-link" %>
-        <span class="site-header__nav-item"><%= t("layouts.header.tasks") %></span>
+        <%= link_to t("layouts.header.tasks"), tasks_path, class: "site-header__nav-link" %>
         <span class="site-header__nav-item"><%= t("layouts.header.history") %></span>
         <%= button_to t("home.logout"), logout_path, method: :delete, class: "site-header__logout" %>
       </nav>

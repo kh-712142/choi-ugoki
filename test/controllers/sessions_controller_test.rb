@@ -33,7 +33,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "header.site-header a.site-header__brand", "ちょい動き"
     assert_select "header.site-header a[href='#{root_path}']", "今日"
-    assert_select "header.site-header .site-header__nav-item", "タスク"
+    assert_select "header.site-header a[href='#{tasks_path}']", "タスク"
     assert_select "header.site-header .site-header__nav-item", "履歴"
     assert_select "header.site-header form[action='#{logout_path}']"
   end

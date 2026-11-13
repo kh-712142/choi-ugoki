@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  belongs_to :user, optional: true
+
   scope :default_tasks, -> { where(user_id: nil) }
 
   def self.daily_recommendation(date = Date.current)
