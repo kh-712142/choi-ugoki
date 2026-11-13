@@ -2,10 +2,18 @@
 
 <main class="home-page">
   <section class="home-page__intro" aria-labelledby="page-title">
-    <p class="home-page__eyebrow"><%= t("home.eyebrow") %></p>
     <h1 id="page-title"><%= t("home.title") %></h1>
-    <p class="home-page__description">
-      <%= t("home.description") %>
-    </p>
+    <section class="home-page__recommendation" aria-labelledby="recommendation-title">
+      <h2 id="recommendation-title"><%= t("home.recommendation_title") %></h2>
+
+      <% if @recommended_task %>
+        <div class="home-page__recommendation-card">
+          <p class="home-page__recommendation-name"><%= @recommended_task.name %></p>
+          <p class="home-page__recommendation-caption"><%= t("home.recommendation_caption") %></p>
+        </div>
+      <% else %>
+        <p class="home-page__empty"><%= t("home.no_recommendation") %></p>
+      <% end %>
+    </section>
   </section>
 </main>

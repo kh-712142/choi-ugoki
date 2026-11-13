@@ -114,37 +114,55 @@ body {
 }
 
 .home-page {
-	display: grid;
+	display: block;
 	flex: 1;
-	place-items: center;
-	padding: 48px 24px;
+	width: min(100%, 1120px);
+	margin: 0 auto;
+	padding: 24px 24px 48px;
 }
 
 .home-page__intro {
-	width: min(100%, 720px);
-	padding: 64px 32px;
-	border-left: 4px solid var(--color-accent);
-	background: #fff;
-}
-
-.home-page__eyebrow {
-	margin-bottom: 12px;
-	color: var(--color-accent);
-	font-size: 0.9rem;
-	font-weight: 700;
+	width: 100%;
 }
 
 .home-page h1 {
-	margin-bottom: 16px;
-	font-size: clamp(2.5rem, 8vw, 4.5rem);
+	margin-bottom: 24px;
+	color: #202b40;
+	font-size: 2rem;
 	font-weight: 800;
 }
 
-.home-page__description {
+.home-page__recommendation h2 {
+	margin-bottom: 12px;
+	color: #3f4a5d;
+	font-size: 1.15rem;
+	font-weight: 500;
+}
+
+.home-page__recommendation-card,
+.home-page__empty {
+	padding: 24px;
+	border: 2px solid #dfe4ec;
+	border-radius: 12px;
+	background: #fff;
+	color: #25324a;
+	box-shadow: 0 1px 2px rgb(37 50 74 / 4%);
+}
+
+.home-page__recommendation-name {
+	margin: 0 0 12px;
+	font-size: 1.35rem;
+	font-weight: 800;
+}
+
+.home-page__recommendation-caption {
 	margin-bottom: 0;
-	color: var(--color-muted);
-	font-size: 1.1rem;
-	line-height: 1.8;
+	color: #68758a;
+}
+
+.home-page__empty {
+	margin: 0;
+	color: #68758a;
 }
 
 .registration-page {
@@ -319,7 +337,16 @@ body {
 	}
 
 	.home-page__intro {
-		padding: 40px 24px;
+		padding: 0;
+	}
+
+	.home-page {
+		padding: 24px 20px 36px;
+	}
+
+	.home-page__recommendation-card,
+	.home-page__empty {
+		padding: 20px;
 	}
 
 	.registration-panel {

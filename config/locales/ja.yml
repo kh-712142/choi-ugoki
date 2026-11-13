@@ -3,8 +3,10 @@ ja:
     name: "ちょい動き"
   home:
     eyebrow: "小さく始める、今日の運動"
-    title: "ちょい動き"
-    description: "疲れて帰った日も、短い運動から始められるアプリです。"
+    title: "今日の小さな運動"
+    recommendation_title: "今日のおすすめ"
+    recommendation_caption: "今日の小さなタスク"
+    no_recommendation: "おすすめタスクは準備中です。"
     logout: "ログアウト"
   layouts:
     header:
