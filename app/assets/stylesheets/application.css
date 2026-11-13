@@ -227,9 +227,8 @@ body {
 	text-decoration: none;
 }
 
-.task-list__add-button:disabled {
-	cursor: not-allowed;
-	opacity: 0.75;
+.task-list__add-button:hover {
+	background: #cadcf8;
 }
 
 .task-list__back-link {
@@ -244,6 +243,43 @@ body {
 .task-list__back-link:focus-visible {
 	outline: 3px solid #9dbcf4;
 	outline-offset: 2px;
+}
+
+.task-form-page {
+	flex: 1;
+	width: min(100%, 1120px);
+	margin: 0 auto;
+	padding: 48px 40px;
+}
+
+.task-form {
+	width: 100%;
+}
+
+.task-form h1 {
+	margin: 0 0 32px;
+	color: #202b40;
+	font-size: 2rem;
+	font-weight: 800;
+}
+
+.task-form__fields {
+	display: grid;
+	gap: 24px;
+	margin-bottom: 20px;
+}
+
+.task-form__fields .task-list__add-button {
+	width: 100%;
+}
+
+.task-form > .task-list__back-link {
+	margin-top: 0;
+}
+
+.task-form__note {
+	margin: 28px 0 0;
+	color: #68758a;
 }
 
 .registration-page {
@@ -437,6 +473,10 @@ body {
 	.task-list__item,
 	.task-list__empty {
 		padding: 18px 20px;
+	}
+
+	.task-form-page {
+		padding: 32px 20px;
 	}
 
 	.registration-panel {

@@ -20,6 +20,14 @@ ja:
       add: "タスクを追加"
       back: "今日の画面へ戻る"
       empty: "作成したタスクはまだありません"
+    new:
+      title: "タスクを登録"
+      name_label: "タスク名"
+      name_placeholder: "例：肩を10秒伸ばす"
+      submit: "登録する"
+      back: "タスク一覧へ戻る"
+      errors_heading: "入力内容を確認してください"
+      blank_error: "空欄では登録できません"
   users:
     new:
       eyebrow: "ちょい動きを始めましょう"
@@ -46,3 +54,5 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認）"
+      task:
+        name: "タスク名"

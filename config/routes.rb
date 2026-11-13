@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: :login
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy", as: :logout
-  resources :tasks, only: :index
+  resources :tasks, only: %i[ index new create ]
   resources :users, only: %i[ new create ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
