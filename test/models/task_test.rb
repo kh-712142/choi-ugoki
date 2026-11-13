@@ -1,6 +1,10 @@
 require "test_helper"
 
 class TaskTest < ActiveSupport::TestCase
+  setup do
+    Task.default_tasks.delete_all
+  end
+
   test "returns the same default task for the same date" do
     create_default_tasks(3)
 

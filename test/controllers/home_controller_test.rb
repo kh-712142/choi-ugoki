@@ -1,6 +1,10 @@
 require "test_helper"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    Task.default_tasks.delete_all
+  end
+
   test "shows one daily recommendation from the default tasks" do
     user = User.create!(email: "home@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
