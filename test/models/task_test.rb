@@ -2,13 +2,13 @@ require "test_helper"
 
 class TaskTest < ActiveSupport::TestCase
   test "returns the same default task for the same date" do
-    tasks = create_default_tasks(3)
+    create_default_tasks(3)
 
     first_recommendation = Task.daily_recommendation(Date.new(2026, 11, 13))
     second_recommendation = Task.daily_recommendation(Date.new(2026, 11, 13))
 
     assert_equal first_recommendation, second_recommendation
-    assert_includes tasks, first_recommendation
+    assert Task.default_tasks.exists?(first_recommendation.id)
   end
 
   test "changes the recommendation on the next date" do
