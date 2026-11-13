@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <% if current_user %>
+      <%= link_to t("app.name"), root_path, class: "site-header__brand" %>
+
+      <nav class="site-header__navigation" aria-label="メインナビゲーション">
+        <%= link_to t("layouts.header.today"), root_path, class: "site-header__nav-link" %>
+        <span class="site-header__nav-item"><%= t("layouts.header.tasks") %></span>
+        <span class="site-header__nav-item"><%= t("layouts.header.history") %></span>
+        <%= button_to t("home.logout"), logout_path, method: :delete, class: "site-header__logout" %>
+      </nav>
+    <% else %>
+      <span class="site-header__brand"><%= t("app.name") %></span>
+    <% end %>
+  </div>
+</header>

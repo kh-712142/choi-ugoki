@@ -23,9 +23,99 @@ body {
 	background: var(--color-background);
 }
 
+.app-shell {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+.site-header {
+	border: 1px solid #d5deef;
+	background: #e8edfb;
+}
+
+.site-header__inner,
+.site-footer__inner {
+	display: flex;
+	width: min(100%, 1120px);
+	min-height: 72px;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+	padding: 12px 24px;
+}
+
+.site-header__inner {
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.site-header__brand {
+	color: #25324a;
+	font-size: 1.25rem;
+	font-weight: 800;
+	text-decoration: none;
+}
+
+.site-header__brand:focus-visible,
+.site-header__nav-link:focus-visible,
+.site-header__logout:focus-visible {
+	outline: 3px solid #6f98eb;
+	outline-offset: 3px;
+}
+
+.site-header__navigation {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.site-header__nav-link,
+.site-header__nav-item {
+	color: #3f4a5d;
+	font-size: 0.95rem;
+	text-decoration: none;
+}
+
+.site-header__nav-link:hover {
+	color: #1d5eaa;
+}
+
+.site-header__logout {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: #25324a;
+	font: inherit;
+	font-size: 0.95rem;
+}
+
+.site-header__logout:hover {
+	color: #1d5eaa;
+}
+
+.site-footer {
+	border-top: 1px solid #dfe5f0;
+	background: #f1f4fb;
+}
+
+.site-footer__inner {
+	min-height: 56px;
+	justify-content: center;
+	color: #61708a;
+	font-size: 0.875rem;
+	text-align: center;
+}
+
+.site-footer__inner p {
+	margin: 0;
+}
+
 .home-page {
 	display: grid;
-	min-height: 100vh;
+	flex: 1;
 	place-items: center;
 	padding: 48px 24px;
 }
@@ -57,18 +147,9 @@ body {
 	line-height: 1.8;
 }
 
-.home-page__logout {
-	margin-top: 24px;
-	padding: 8px 14px;
-	border: 1px solid #aab8ca;
-	border-radius: 6px;
-	background: #fff;
-	color: #25324a;
-}
-
 .registration-page {
 	display: grid;
-	min-height: 100vh;
+	flex: 1;
 	place-items: center;
 	padding: 48px 24px;
 	background: #f1f5fb;
@@ -178,7 +259,7 @@ body {
 
 .login-page {
 	display: grid;
-	min-height: 100vh;
+	flex: 1;
 	place-items: center;
 	padding: 48px 24px;
 	background: #f1f5fb;
@@ -194,13 +275,6 @@ body {
 .login-panel h1 {
 	margin-bottom: 28px;
 	font-size: 2rem;
-	font-weight: 800;
-}
-
-.login-panel__eyebrow {
-	margin-bottom: 28px;
-	color: #25324a;
-	font-size: 1.25rem;
 	font-weight: 800;
 }
 
@@ -230,6 +304,20 @@ body {
 }
 
 @media (max-width: 576px) {
+	.site-header__inner {
+		min-height: 64px;
+		padding: 12px 20px;
+	}
+
+	.site-header__navigation {
+		gap: 12px;
+	}
+
+	.site-footer__inner {
+		min-height: 48px;
+		padding: 10px 20px;
+	}
+
 	.home-page__intro {
 		padding: 40px 24px;
 	}
