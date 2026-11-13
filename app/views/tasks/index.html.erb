@@ -1,0 +1,23 @@
+<% content_for :title, t("tasks.index.title") %>
+
+<main class="task-list-page">
+  <section class="task-list" aria-labelledby="task-list-title">
+    <h1 id="task-list-title"><%= t("tasks.index.title") %></h1>
+    <p class="task-list__description"><%= t("tasks.index.description") %></p>
+
+    <% if @tasks.any? %>
+      <ul class="task-list__items">
+        <% @tasks.each do |task| %>
+          <li class="task-list__item"><%= task.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="task-list__empty"><%= t("tasks.index.empty") %></p>
+    <% end %>
+
+    <div class="task-list__actions">
+      <button class="task-list__add-button" type="button" disabled><%= t("tasks.index.add") %></button>
+      <%= link_to t("tasks.index.back"), root_path, class: "task-list__back-link" %>
+    </div>
+  </section>
+</main>
