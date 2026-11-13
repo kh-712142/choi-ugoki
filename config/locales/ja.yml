@@ -6,6 +6,11 @@ ja:
     title: "ちょい動き"
     description: "疲れて帰った日も、短い運動から始められるアプリです。"
     logout: "ログアウト"
+  layouts:
+    header:
+      today: "今日"
+      tasks: "タスク"
+      history: "履歴"
   users:
     new:
       eyebrow: "ちょい動きを始めましょう"
