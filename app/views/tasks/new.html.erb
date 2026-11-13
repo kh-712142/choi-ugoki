@@ -1,0 +1,22 @@
+<% content_for :title, t("tasks.new.title") %>
+
+<main class="task-form-page">
+  <section class="task-form" aria-labelledby="task-form-title">
+    <h1 id="task-form-title"><%= t("tasks.new.title") %></h1>
+
+    <% if flash[:alert].present? %>
+      <p class="registration-errors" role="alert"><%= flash[:alert] %></p>
+    <% end %>
+
+    <%= form_with model: @task, class: "task-form__fields" do |form| %>
+      <div class="registration-form__field">
+        <%= form.label :name, t("tasks.new.name_label") %>
+        <%= form.text_field :name, maxlength: 100, placeholder: t("tasks.new.name_placeholder"), class: "form-control" %>
+      </div>
+
+      <%= form.submit t("tasks.new.submit"), class: "task-list__add-button" %>
+    <% end %>
+
+    <%= link_to t("tasks.new.back"), tasks_path, class: "task-list__back-link" %>
+  </section>
+</main>

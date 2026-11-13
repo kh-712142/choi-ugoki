@@ -16,7 +16,7 @@
     <% end %>
 
     <div class="task-list__actions">
-      <button class="task-list__add-button" type="button" disabled><%= t("tasks.index.add") %></button>
+      <%= link_to t("tasks.index.add"), new_task_path, class: "task-list__add-button" %>
       <%= link_to t("tasks.index.back"), root_path, class: "task-list__back-link" %>
     </div>
   </section>
