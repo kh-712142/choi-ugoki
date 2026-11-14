@@ -11,6 +11,10 @@ ja:
     choose_recommendation: "これにする"
     close_recommendations: "候補を閉じる"
     no_alternative_recommendations: "ほかの候補はありません。"
+    complete_task: "できた"
+    completion_one: "えらい！この調子で明日もなにか1つ運動してみよう！"
+    completion_many: "すばらしい！%{count}回以上運動できた自分を褒めよう！"
+    close_completion_message: "メッセージを閉じる"
     logout: "ログアウト"
   layouts:
     header:

@@ -14,6 +14,7 @@
           <p class="home-page__recommendation-name"><%= @recommended_task.name %></p>
           <p class="home-page__recommendation-caption"><%= t("home.recommendation_caption") %></p>
         </div>
+        <%= button_to t("home.complete_task"), task_completions_path, method: :post, class: "home-page__complete-button" %>
       <% else %>
         <p class="home-page__empty"><%= t("home.no_recommendation") %></p>
       <% end %>
@@ -56,4 +57,19 @@
       </div>
     </section>
   </section>
+
+  <% if @completion_count.present? %>
+    <dialog class="completion-dialog" data-completion-dialog data-completion-count="<%= @completion_count %>" aria-labelledby="completion-dialog-title">
+      <div class="completion-dialog__panel">
+        <button class="completion-dialog__close" type="button" data-completion-close aria-label="<%= t("home.close_completion_message") %>">×</button>
+        <p id="completion-dialog-title" class="completion-dialog__message">
+          <% if @completion_count.to_i >= 2 %>
+            <%= t("home.completion_many", count: @completion_count) %>
+          <% else %>
+            <%= t("home.completion_one") %>
+          <% end %>
+        </p>
+      </div>
+    </dialog>
+  <% end %>
 </main>
