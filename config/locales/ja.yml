@@ -7,6 +7,10 @@ ja:
     recommendation_title: "今日のおすすめ"
     recommendation_caption: "今日の小さなタスク"
     no_recommendation: "おすすめタスクは準備中です。"
+    alternative_recommendations: "別候補を見る"
+    choose_recommendation: "これにする"
+    close_recommendations: "候補を閉じる"
+    no_alternative_recommendations: "ほかの候補はありません。"
     logout: "ログアウト"
   layouts:
     header:

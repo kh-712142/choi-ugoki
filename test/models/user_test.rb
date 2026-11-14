@@ -1,6 +1,10 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  setup do
+    Task.default_tasks.delete_all
+  end
+
   test "normalizes email before validation" do
     user = User.new(email: "  TEST@Example.COM ", password: "password123")
 
@@ -34,5 +38,41 @@ class UserTest < ActiveSupport::TestCase
 
     assert_not user.valid?
     assert user.errors[:password].any?
+  end
+
+  test "uses a selected recommendation for its date and falls back the next day" do
+    user = User.create!(email: "recommendation@example.com", password: "password123")
+    selected_task = Task.create!(user_id: nil, name: "ユーザーが選んだ標準タスク")
+    Task.create!(user_id: nil, name: "別の標準タスク")
+    selected_date = Date.new(2026, 11, 14)
+
+    user.select_daily_recommendation!(selected_task, selected_date)
+
+    assert_equal selected_task, user.recommended_task_for(selected_date)
+    assert_equal Task.daily_recommendation(selected_date + 1), user.recommended_task_for(selected_date + 1)
+  end
+
+  test "includes only default and own tasks in alternatives and excludes current recommendation" do
+    user = User.create!(email: "candidate@example.com", password: "password123")
+    selected_task = Task.create!(user_id: nil, name: "現在のおすすめ")
+    default_task = Task.create!(user_id: nil, name: "別の標準タスク")
+    own_task = user.tasks.create!(name: "自分のタスク")
+    another_user = User.create!(email: "another-candidate@example.com", password: "password123")
+    another_user.tasks.create!(name: "他のユーザーのタスク")
+    date = Date.current
+
+    user.select_daily_recommendation!(selected_task, date)
+
+    assert_equal [ default_task, own_task ], user.alternative_recommendation_tasks(date)
+  end
+
+  test "cannot select another user's task as a recommendation" do
+    user = User.create!(email: "candidate-owner@example.com", password: "password123")
+    another_user = User.create!(email: "candidate-other@example.com", password: "password123")
+    another_users_task = another_user.tasks.create!(name: "他人のタスク")
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      user.select_daily_recommendation!(another_users_task)
+    end
   end
 end

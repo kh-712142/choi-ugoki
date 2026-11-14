@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_11_085856) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_14_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -37,10 +37,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_11_085856) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "daily_recommendation_task_id"
+    t.date "daily_recommendation_date"
     t.index "lower((email)::text)", name: "index_users_on_lower_email", unique: true
+    t.index ["daily_recommendation_task_id"], name: "index_users_on_daily_recommendation_task_id"
   end
 
   add_foreign_key "task_completions", "tasks", on_delete: :cascade
   add_foreign_key "task_completions", "users", on_delete: :cascade
   add_foreign_key "tasks", "users", on_delete: :cascade
+  add_foreign_key "users", "tasks", column: "daily_recommendation_task_id", on_delete: :nullify
 end

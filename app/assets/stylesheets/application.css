@@ -165,6 +165,153 @@ body {
 	color: #68758a;
 }
 
+.recommendation-picker {
+	margin-top: 20px;
+}
+
+.recommendation-picker__open,
+.recommendation-dialog__next,
+.recommendation-dialog__choose {
+	display: grid;
+	width: 100%;
+	min-height: 54px;
+	place-items: center;
+	border: 2px solid #7a8494;
+	border-radius: 8px;
+	background: #f9fafc;
+	color: #25324a;
+	font: inherit;
+	font-size: 1.05rem;
+}
+
+.recommendation-picker__open:hover,
+.recommendation-dialog__next:hover {
+	background: #eef1f6;
+}
+
+.recommendation-picker__open:focus-visible,
+.recommendation-dialog__next:focus-visible,
+.recommendation-dialog__choose:focus-visible,
+.recommendation-dialog__close:focus-visible,
+.recommendation-dialog__candidate:focus-within {
+	outline: 3px solid #9dbcf4;
+	outline-offset: 2px;
+}
+
+.recommendation-picker__open:disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+.recommendation-dialog {
+	width: min(100% - 32px, 560px);
+	max-width: 560px;
+	max-height: min(80vh, 720px);
+	padding: 0;
+	border: 1px solid #d5deef;
+	border-radius: 12px;
+	background: #f1f5fb;
+	color: #25324a;
+	box-shadow: 0 16px 48px rgb(22 34 56 / 24%);
+}
+
+.recommendation-dialog::backdrop {
+	background: rgb(25 37 58 / 48%);
+}
+
+.recommendation-dialog__panel {
+	padding: 20px;
+}
+
+.recommendation-dialog__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.recommendation-dialog__header h3 {
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 800;
+}
+
+.recommendation-dialog__close {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #aab8ca;
+	border-radius: 6px;
+	background: #fff;
+	color: #25324a;
+	font-size: 1.5rem;
+}
+
+.recommendation-dialog__form {
+	display: grid;
+	gap: 16px;
+}
+
+.recommendation-dialog__candidates {
+	display: grid;
+	max-height: 48vh;
+	gap: 10px;
+	overflow-y: auto;
+}
+
+.recommendation-dialog__candidate {
+	display: flex;
+	min-height: 58px;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 16px;
+	border: 2px solid #dfe4ec;
+	border-radius: 8px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.recommendation-dialog__radio {
+	width: 20px;
+	height: 20px;
+	flex: 0 0 auto;
+	accent-color: #3974b8;
+}
+
+.recommendation-dialog__candidate:has(.recommendation-dialog__radio:checked) {
+	border-color: #6f98eb;
+	background: #e6effd;
+}
+
+.recommendation-dialog__actions {
+	display: grid;
+	gap: 10px;
+}
+
+.recommendation-dialog__choose {
+	border-color: #6f98eb;
+	background: #dce9fc;
+}
+
+.recommendation-dialog__choose:hover:not(:disabled) {
+	background: #cadcf8;
+}
+
+.recommendation-dialog__choose:disabled {
+	border-color: #c5cad3;
+	background: #e6e8ed;
+	color: #707888;
+	cursor: not-allowed;
+}
+
+.recommendation-dialog__empty {
+	margin: 0;
+	padding: 18px;
+	border-radius: 8px;
+	background: #fff;
+	color: #68758a;
+}
+
 .task-list-page {
 	flex: 1;
 	width: min(100%, 1120px);
@@ -464,6 +611,10 @@ body {
 	.home-page__recommendation-card,
 	.home-page__empty {
 		padding: 20px;
+	}
+
+	.recommendation-dialog__panel {
+		padding: 16px;
 	}
 
 	.task-list-page {
