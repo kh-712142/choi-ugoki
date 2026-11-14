@@ -1,6 +1,10 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  setup do
+    Task.default_tasks.delete_all
+  end
+
   test "normalizes email before validation" do
     user = User.new(email: "  TEST@Example.COM ", password: "password123")
 
