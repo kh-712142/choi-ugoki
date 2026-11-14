@@ -21,6 +21,17 @@ ja:
       today: "今日"
       tasks: "タスク"
       history: "履歴"
+  completion_histories:
+    title: "達成履歴"
+    weekly_count: "今週できた回数：%{count}回"
+    weekly_empty: "今週の達成はまだありません"
+    daily_title: "日付ごとの達成タスク"
+    completed: "達成"
+    empty: "達成履歴はまだありません"
+    back: "今日の画面へ戻る"
+  date:
+    formats:
+      history: "%-m/%-d"
   tasks:
     index:
       title: "自分のタスク"

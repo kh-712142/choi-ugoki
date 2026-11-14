@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
+  get "history", to: "completion_histories#index", as: :history
   post "daily-recommendation", to: "home#select_recommendation", as: :daily_recommendation
   get "login", to: "sessions#new", as: :login
   post "login", to: "sessions#create"

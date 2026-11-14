@@ -1,0 +1,34 @@
+<% content_for :title, t("completion_histories.title") %>
+
+<main class="completion-history-page">
+  <section class="completion-history" aria-labelledby="completion-history-title">
+    <h1 id="completion-history-title"><%= t("completion_histories.title") %></h1>
+
+    <p class="completion-history__weekly-count">
+      <% if @weekly_completion_count.positive? %>
+        <%= t("completion_histories.weekly_count", count: @weekly_completion_count) %>
+      <% else %>
+        <%= t("completion_histories.weekly_empty") %>
+      <% end %>
+    </p>
+
+    <h2 class="completion-history__list-title"><%= t("completion_histories.daily_title") %></h2>
+    <% if @daily_completions.any? %>
+      <ul class="completion-history__items">
+        <% @daily_completions.each do |date, completions| %>
+          <% completions.each do |completion| %>
+            <li class="completion-history__item">
+              <time class="completion-history__date" datetime="<%= date.iso8601 %>"><%= l(date, format: :history) %></time>
+              <span class="completion-history__task"><%= completion.task.name %></span>
+              <span class="completion-history__status"><%= t("completion_histories.completed") %></span>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="completion-history__empty"><%= t("completion_histories.empty") %></p>
+    <% end %>
+
+    <%= link_to t("completion_histories.back"), root_path, class: "completion-history__back-link" %>
+  </section>
+</main>
