@@ -6,6 +6,8 @@
 <main class="home-page">
   <section class="home-page__intro" aria-labelledby="page-title">
     <h1 id="page-title"><%= t("home.title") %></h1>
+    <%= render "shared/weekly_completion_count", count: @weekly_completion_count %>
+
     <section class="home-page__recommendation" aria-labelledby="recommendation-title">
       <h2 id="recommendation-title"><%= t("home.recommendation_title") %></h2>
 
@@ -56,6 +58,22 @@
         </dialog>
       </div>
     </section>
+  </section>
+
+  <section class="home-page__daily-achievements" aria-labelledby="daily-achievements-title">
+    <h2 id="daily-achievements-title"><%= t("home.today_achievements") %></h2>
+    <% if @today_completions.any? %>
+      <ul class="home-page__daily-achievement-list">
+        <% @today_completions.each do |completion| %>
+          <li class="home-page__daily-achievement">
+            <span class="home-page__daily-achievement-name"><%= completion.task.name %></span>
+            <span class="home-page__daily-achievement-status"><%= t("home.completion_status") %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="home-page__daily-empty"><%= t("home.no_today_achievements") %></p>
+    <% end %>
   </section>
 
   <% if @completion_count.present? %>

@@ -24,7 +24,7 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", "達成履歴"
-    assert_select ".completion-history__weekly-count", "今週できた回数：3回"
+    assert_select ".weekly-completion-count", "今週できた回数：3回"
     assert_select ".completion-history__item", 5
     assert_operator response.body.index("11/16"), :<, response.body.index("11/15")
     assert_includes response.body, "先週のタスク"
@@ -64,7 +64,7 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
     get history_path
 
     assert_response :success
-    assert_select ".completion-history__weekly-count", "今週の達成はまだありません"
+    assert_select ".weekly-completion-count", "今週の達成はまだありません"
     assert_select ".completion-history__empty", "達成履歴はまだありません"
     assert_select ".completion-history__item", 0
   end

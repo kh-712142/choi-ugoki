@@ -182,6 +182,61 @@ body {
 	outline-offset: 2px;
 }
 
+.weekly-completion-count {
+	margin: 0 0 28px;
+	padding: 20px 22px;
+	border: 2px solid #dfe4ec;
+	border-radius: 12px;
+	background: #fff;
+	color: #25324a;
+	font-size: 1.1rem;
+}
+
+.home-page__daily-achievements {
+	margin-top: 28px;
+}
+
+.home-page__daily-achievements h2 {
+	margin: 0 0 16px;
+	color: #3f4a5d;
+	font-size: 1.15rem;
+	font-weight: 500;
+}
+
+.home-page__daily-achievement-list {
+	display: grid;
+	gap: 14px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.home-page__daily-achievement,
+.home-page__daily-empty {
+	margin: 0;
+	padding: 18px 22px;
+	border: 2px solid #dfe4ec;
+	border-radius: 12px;
+	background: #fff;
+	color: #25324a;
+}
+
+.home-page__daily-achievement {
+	display: grid;
+	gap: 4px;
+}
+
+.home-page__daily-achievement-name {
+	font-size: 1.05rem;
+	font-weight: 700;
+	overflow-wrap: anywhere;
+}
+
+.home-page__daily-achievement-status,
+.home-page__daily-empty {
+	color: #68758a;
+}
+
 .completion-dialog {
 	width: min(100% - 32px, 480px);
 	max-width: 480px;
@@ -469,7 +524,6 @@ body {
 	font-weight: 800;
 }
 
-.completion-history__weekly-count,
 .completion-history__item,
 .completion-history__empty {
 	border: 2px solid #dfe4ec;
@@ -478,10 +532,8 @@ body {
 	color: #25324a;
 }
 
-.completion-history__weekly-count {
-	margin: 0 0 44px;
-	padding: 22px 24px;
-	font-size: 1.1rem;
+.completion-history .weekly-completion-count {
+	margin-bottom: 44px;
 }
 
 .completion-history__list-title {

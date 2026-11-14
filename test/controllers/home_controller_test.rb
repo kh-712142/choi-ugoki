@@ -29,8 +29,38 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-recommendation-next]", "別候補を見る"
     assert_select "input[data-recommendation-choose][disabled][value='これにする']"
     assert_select "script[src*='recommendation_picker']"
-    assert_no_match(/今週できた回数|今日の達成状況/, response.body)
+    assert_select ".weekly-completion-count", "今週できた回数：0回"
+    assert_select "#daily-achievements-title", "今日の達成状況"
+    assert_select ".home-page__daily-empty", "今日の達成はまだありません"
     assert_select "form[action='#{task_completions_path}'] button", "できた"
+  end
+
+  test "shows today's five newest achievements and excludes other dates and users" do
+    travel_to Time.zone.local(2026, 11, 14, 12)
+    user = User.create!(email: "home-achievements@example.com", password: "password123")
+    post login_path, params: { email: user.email, password: "password123" }
+    tasks = 7.times.map { |index| Task.create!(user_id: nil, name: "今日の達成#{index}") }
+    tasks.each_with_index do |task, index|
+      user.task_completions.create!(task:, completed_on: Date.current, created_at: (6 - index).minutes.ago)
+    end
+    yesterday_task = Task.create!(user_id: nil, name: "昨日の達成")
+    user.task_completions.create!(task: yesterday_task, completed_on: Date.new(2026, 11, 8))
+    other_user = User.create!(email: "home-achievements-other@example.com", password: "password123")
+    other_user.task_completions.create!(task: tasks.last, completed_on: Date.current)
+    other_users_task = other_user.tasks.create!(name: "他のユーザーの達成")
+    other_user.task_completions.create!(task: other_users_task, completed_on: Date.current)
+
+    get root_path
+
+    assert_response :success
+    assert_select ".weekly-completion-count", "今週できた回数：7回"
+    assert_select ".home-page__daily-achievement", 5
+    achievement_names = css_select(".home-page__daily-achievement-name").map(&:text)
+    assert_equal [ "今日の達成6", "今日の達成5", "今日の達成4", "今日の達成3", "今日の達成2" ], achievement_names
+    assert_not_includes achievement_names, "昨日の達成"
+    assert_not_includes achievement_names, "他のユーザーの達成"
+  ensure
+    travel_back
   end
 
   test "shows a message when no default tasks exist" do

@@ -4,13 +4,9 @@
   <section class="completion-history" aria-labelledby="completion-history-title">
     <h1 id="completion-history-title"><%= t("completion_histories.title") %></h1>
 
-    <p class="completion-history__weekly-count">
-      <% if @weekly_completion_count.positive? %>
-        <%= t("completion_histories.weekly_count", count: @weekly_completion_count) %>
-      <% else %>
-        <%= t("completion_histories.weekly_empty") %>
-      <% end %>
-    </p>
+    <%= render "shared/weekly_completion_count",
+               count: @weekly_completion_count,
+               empty_message: t("completion_histories.weekly_empty") %>
 
     <h2 class="completion-history__list-title"><%= t("completion_histories.daily_title") %></h2>
     <% if @daily_completions.any? %>

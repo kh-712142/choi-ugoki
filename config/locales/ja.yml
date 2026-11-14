@@ -15,6 +15,9 @@ ja:
     completion_one: "えらい！この調子で明日もなにか1つ運動してみよう！"
     completion_many: "すばらしい！%{count}回以上運動できた自分を褒めよう！"
     close_completion_message: "メッセージを閉じる"
+    today_achievements: "今日の達成状況"
+    completion_status: "達成済み"
+    no_today_achievements: "今日の達成はまだありません"
     logout: "ログアウト"
   layouts:
     header:
