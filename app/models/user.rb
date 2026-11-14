@@ -32,6 +32,19 @@ class User < ApplicationRecord
     update!(daily_recommendation_task: selected_task, daily_recommendation_date: date)
   end
 
+  def weekly_completion_count(date = Date.current)
+    task_completions.where(
+      completed_on: date.beginning_of_week(:monday)..date.end_of_week(:monday)
+    ).count
+  end
+
+  def recent_completions_on(date = Date.current, limit: 5)
+    task_completions.includes(:task)
+                    .where(completed_on: date)
+                    .order(created_at: :desc, id: :desc)
+                    .limit(limit)
+  end
+
   private
 
   def normalize_email

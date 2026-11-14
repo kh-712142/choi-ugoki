@@ -4,6 +4,8 @@ class HomeController < ApplicationController
     @alternative_tasks = current_user.alternative_recommendation_tasks
     @can_change_recommendation = @alternative_tasks.any?
     @completion_count = flash[:completion_count]
+    @weekly_completion_count = current_user.weekly_completion_count
+    @today_completions = current_user.recent_completions_on
   end
 
   def select_recommendation

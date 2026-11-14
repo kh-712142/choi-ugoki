@@ -75,4 +75,37 @@ class UserTest < ActiveSupport::TestCase
       user.select_daily_recommendation!(another_users_task)
     end
   end
+
+  test "counts this week's completions including both Monday and Sunday" do
+    travel_to Time.zone.local(2026, 11, 11, 12)
+    user = User.create!(email: "weekly-count@example.com", password: "password123")
+    another_user = User.create!(email: "weekly-count-other@example.com", password: "password123")
+    task = Task.create!(user_id: nil, name: "標準タスク")
+
+    user.task_completions.create!(task:, completed_on: Date.new(2026, 11, 9))
+    user.task_completions.create!(task:, completed_on: Date.new(2026, 11, 15))
+    user.task_completions.create!(task:, completed_on: Date.new(2026, 11, 15))
+    user.task_completions.create!(task:, completed_on: Date.new(2026, 11, 8))
+    user.task_completions.create!(task:, completed_on: Date.new(2026, 11, 16))
+    another_user.task_completions.create!(task:, completed_on: Date.current)
+
+    assert_equal 3, user.weekly_completion_count
+  ensure
+    travel_back
+  end
+
+  test "returns only the five newest completions for the given date" do
+    travel_to Time.zone.local(2026, 11, 14, 12)
+    user = User.create!(email: "recent-completions@example.com", password: "password123")
+    tasks = 7.times.map { |index| Task.create!(user_id: nil, name: "タスク#{index}") }
+    completions = tasks.each_with_index.map do |task, index|
+      user.task_completions.create!(task:, completed_on: Date.current, created_at: (6 - index).minutes.ago)
+    end
+    yesterday_task = Task.create!(user_id: nil, name: "昨日のタスク")
+    user.task_completions.create!(task: yesterday_task, completed_on: Date.yesterday)
+
+    assert_equal completions.last(5).reverse, user.recent_completions_on.to_a
+  ensure
+    travel_back
+  end
 end

@@ -1,0 +1,7 @@
+<p class="weekly-completion-count">
+  <% if count.zero? && local_assigns[:empty_message].present? %>
+    <%= empty_message %>
+  <% else %>
+    <%= t("completion_histories.weekly_count", count:) %>
+  <% end %>
+</p>
