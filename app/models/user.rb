@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
+  has_many :task_completions, dependent: :destroy
   belongs_to :daily_recommendation_task, class_name: "Task", optional: true
 
   has_secure_password

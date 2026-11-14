@@ -1,6 +1,19 @@
 (() => {
   // TOP画面にある候補ピッカーを初期化する。Turbo遷移での二重登録も防ぐ。
   const initializeRecommendationPickers = () => {
+    // 達成後のメッセージがある場合は、自動でダイアログを表示する。
+    document.querySelectorAll("[data-completion-dialog]").forEach((dialog) => {
+      if (dialog.dataset.initialized === "true") return;
+      dialog.dataset.initialized = "true";
+
+      const closeButton = dialog.querySelector("[data-completion-close]");
+      closeButton.addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      dialog.showModal();
+    });
+
     document.querySelectorAll("[data-recommendation-picker]").forEach((picker) => {
       if (picker.dataset.initialized === "true") return;
       picker.dataset.initialized = "true";

@@ -30,7 +30,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[data-recommendation-choose][disabled][value='これにする']"
     assert_select "script[src*='recommendation_picker']"
     assert_no_match(/今週できた回数|今日の達成状況/, response.body)
-    assert_select "button", text: "できた", count: 0
+    assert_select "form[action='#{task_completions_path}'] button", "できた"
   end
 
   test "shows a message when no default tasks exist" do

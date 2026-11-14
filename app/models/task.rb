@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :user, optional: true
+  has_many :task_completions, dependent: :destroy
 
   before_validation :normalize_name
 

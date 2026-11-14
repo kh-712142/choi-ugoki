@@ -3,6 +3,7 @@ class HomeController < ApplicationController
     @recommended_task = current_user.recommended_task_for
     @alternative_tasks = current_user.alternative_recommendation_tasks
     @can_change_recommendation = @alternative_tasks.any?
+    @completion_count = flash[:completion_count]
   end
 
   def select_recommendation
