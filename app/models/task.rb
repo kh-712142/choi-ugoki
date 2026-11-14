@@ -6,6 +6,7 @@ class Task < ApplicationRecord
   validates :name, presence: true, length: { maximum: 100 }
 
   scope :default_tasks, -> { where(user_id: nil) }
+  scope :available_to, ->(user) { default_tasks.or(where(user: user)) }
 
   def self.daily_recommendation(date = Date.current)
     tasks = default_tasks.order(:id)

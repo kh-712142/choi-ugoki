@@ -1,4 +1,7 @@
 <% content_for :title, t("app.name") %>
+<% content_for :head do %>
+  <%= javascript_include_tag "recommendation_picker", defer: true %>
+<% end %>
 
 <main class="home-page">
   <section class="home-page__intro" aria-labelledby="page-title">
@@ -14,6 +17,43 @@
       <% else %>
         <p class="home-page__empty"><%= t("home.no_recommendation") %></p>
       <% end %>
+
+      <div class="recommendation-picker" data-recommendation-picker data-page-size="5">
+        <button class="recommendation-picker__open" type="button" data-recommendation-open <%= "disabled" unless @can_change_recommendation %>>
+          <%= t("home.alternative_recommendations") %>
+        </button>
+
+        <dialog class="recommendation-dialog" data-recommendation-dialog aria-labelledby="recommendation-dialog-title">
+          <div class="recommendation-dialog__panel">
+            <header class="recommendation-dialog__header">
+              <h3 id="recommendation-dialog-title"><%= t("home.alternative_recommendations") %></h3>
+              <button class="recommendation-dialog__close" type="button" data-recommendation-close aria-label="<%= t("home.close_recommendations") %>">×</button>
+            </header>
+
+            <% if @alternative_tasks.any? %>
+              <%= form_with url: daily_recommendation_path, method: :post, class: "recommendation-dialog__form", data: { recommendation_form: true } do %>
+                <div class="recommendation-dialog__candidates" data-recommendation-candidates>
+                  <% @alternative_tasks.each_with_index do |task, index| %>
+                    <label class="recommendation-dialog__candidate" data-recommendation-candidate data-candidate-index="<%= index %>">
+                      <%= radio_button_tag :task_id, task.id, false, class: "recommendation-dialog__radio", data: { recommendation_option: true } %>
+                      <span><%= task.name %></span>
+                    </label>
+                  <% end %>
+                </div>
+
+                <div class="recommendation-dialog__actions">
+                  <button class="recommendation-dialog__next" type="button" data-recommendation-next>
+                    <%= t("home.alternative_recommendations") %>
+                  </button>
+                  <%= submit_tag t("home.choose_recommendation"), class: "recommendation-dialog__choose", disabled: true, data: { recommendation_choose: true } %>
+                </div>
+              <% end %>
+            <% else %>
+              <p class="recommendation-dialog__empty"><%= t("home.no_alternative_recommendations") %></p>
+            <% end %>
+          </div>
+        </dialog>
+      </div>
     </section>
   </section>
 </main>
