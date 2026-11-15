@@ -5,7 +5,7 @@ class TaskTest < ActiveSupport::TestCase
     Task.default_tasks.delete_all
   end
 
-  test "returns the same default task for the same date" do
+  test "同じ日付には同じ標準タスクを返す" do
     create_default_tasks(3)
 
     first_recommendation = Task.daily_recommendation(Date.new(2026, 11, 13))
@@ -15,7 +15,7 @@ class TaskTest < ActiveSupport::TestCase
     assert Task.default_tasks.exists?(first_recommendation.id)
   end
 
-  test "changes the recommendation on the next date" do
+  test "翌日はおすすめタスクが変わる" do
     create_default_tasks(3)
 
     today_recommendation = Task.daily_recommendation(Date.new(2026, 11, 13))
@@ -24,7 +24,7 @@ class TaskTest < ActiveSupport::TestCase
     refute_equal today_recommendation, tomorrow_recommendation
   end
 
-  test "returns no recommendation when there are no default tasks" do
+  test "標準タスクがない場合はおすすめを返さない" do
     assert_nil Task.daily_recommendation
   end
 

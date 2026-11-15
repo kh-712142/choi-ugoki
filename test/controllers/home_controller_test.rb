@@ -5,7 +5,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     Task.default_tasks.delete_all
   end
 
-  test "shows one daily recommendation from the default tasks" do
+  test "標準タスクから今日のおすすめを1件表示する" do
     user = User.create!(email: "home@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
     tasks = 3.times.map do |index|
@@ -38,7 +38,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "form[action='#{task_completions_path}'] button", "できた"
   end
 
-  test "shows today's five newest achievements and excludes other dates and users" do
+  test "今日の達成記録を新しい順に5件表示し、他の日と他ユーザーの記録は含めない" do
     travel_to Time.zone.local(2026, 11, 14, 12)
     user = User.create!(email: "home-achievements@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
@@ -66,7 +66,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     travel_back
   end
 
-  test "shows a message when no default tasks exist" do
+  test "標準タスクがない場合に案内を表示する" do
     user = User.create!(email: "empty-home@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
 
@@ -78,7 +78,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select ".recommendation-dialog__empty", "ほかの候補はありません。"
   end
 
-  test "saves a selected task for the current user and today" do
+  test "選択したタスクを今日のおすすめとして保存する" do
     user = User.create!(email: "selection@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
     selected_task = Task.create!(user_id: nil, name: "選択した候補")
@@ -95,7 +95,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select ".home-page__recommendation-name", "選択した候補"
   end
 
-  test "does not allow selecting another user's task" do
+  test "他のユーザーのタスクをおすすめに選べない" do
     user = User.create!(email: "selection-owner@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
     another_user = User.create!(email: "not-selectable@example.com", password: "password123")

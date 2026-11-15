@@ -5,14 +5,14 @@ class UserTest < ActiveSupport::TestCase
     Task.default_tasks.delete_all
   end
 
-  test "normalizes email before validation" do
+  test "検証前にメールアドレスを正規化する" do
     user = User.new(email: "  TEST@Example.COM ", password: "password123")
 
     assert user.valid?
     assert_equal "test@example.com", user.email
   end
 
-  test "rejects duplicate email regardless of case" do
+  test "大文字小文字を区別せず重複メールアドレスを拒否する" do
     User.create!(email: "existing@example.com", password: "password123")
     duplicate = User.new(email: "EXISTING@example.com", password: "password123")
 
@@ -20,27 +20,27 @@ class UserTest < ActiveSupport::TestCase
     assert_includes duplicate.errors[:email], "はすでに存在します"
   end
 
-  test "requires a password of at least eight characters" do
+  test "8文字未満のパスワードを拒否する" do
     user = User.new(email: "short@example.com", password: "1234567")
 
     assert_not user.valid?
     assert_includes user.errors[:password], "は8文字以上で入力してください"
   end
 
-  test "accepts a password with eight characters" do
+  test "8文字のパスワードを受け入れる" do
     user = User.new(email: "valid@example.com", password: "12345678")
 
     assert user.valid?
   end
 
-  test "rejects a password longer than bcrypt's 72-byte limit" do
+  test "72バイトを超えるパスワードは拒否する" do
     user = User.new(email: "long-password@example.com", password: "あ" * 25)
 
     assert_not user.valid?
     assert user.errors[:password].any?
   end
 
-  test "uses a selected recommendation for its date and falls back the next day" do
+  test "指定日には選択済みのおすすめを使い、翌日は既定のおすすめに戻る" do
     user = User.create!(email: "recommendation@example.com", password: "password123")
     selected_task = Task.create!(user_id: nil, name: "ユーザーが選んだ標準タスク")
     Task.create!(user_id: nil, name: "別の標準タスク")
@@ -52,7 +52,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal Task.daily_recommendation(selected_date + 1), user.recommended_task_for(selected_date + 1)
   end
 
-  test "includes only default and own tasks in alternatives and excludes current recommendation" do
+  test "候補には標準タスクと自分のタスクだけを含め、現在のおすすめを除外する" do
     user = User.create!(email: "candidate@example.com", password: "password123")
     selected_task = Task.create!(user_id: nil, name: "現在のおすすめ")
     default_task = Task.create!(user_id: nil, name: "別の標準タスク")
@@ -66,7 +66,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal [ default_task, own_task ], user.alternative_recommendation_tasks(date)
   end
 
-  test "cannot select another user's task as a recommendation" do
+  test "他のユーザーのタスクをおすすめに選べない" do
     user = User.create!(email: "candidate-owner@example.com", password: "password123")
     another_user = User.create!(email: "candidate-other@example.com", password: "password123")
     another_users_task = another_user.tasks.create!(name: "他人のタスク")
@@ -76,7 +76,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "counts this week's completions including both Monday and Sunday" do
+  test "月曜から日曜までの今週の達成記録を数える" do
     travel_to Time.zone.local(2026, 11, 11, 12)
     user = User.create!(email: "weekly-count@example.com", password: "password123")
     another_user = User.create!(email: "weekly-count-other@example.com", password: "password123")
@@ -94,7 +94,7 @@ class UserTest < ActiveSupport::TestCase
     travel_back
   end
 
-  test "returns only the five newest completions for the given date" do
+  test "指定日の最新達成記録を5件だけ返す" do
     travel_to Time.zone.local(2026, 11, 14, 12)
     user = User.create!(email: "recent-completions@example.com", password: "password123")
     tasks = 7.times.map { |index| Task.create!(user_id: nil, name: "タスク#{index}") }

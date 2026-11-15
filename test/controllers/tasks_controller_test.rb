@@ -6,7 +6,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     post login_path, params: { email: @user.email, password: "password123" }
   end
 
-  test "lists only the current user's tasks in creation order" do
+  test "ログイン中のユーザーのタスクを作成順に表示する" do
     @user.tasks.create!(name: "最初に作成したタスク")
     @user.tasks.create!(name: "次に作成したタスク")
     Task.create!(user_id: nil, name: "標準タスク")
@@ -29,7 +29,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.task-list__add-button[href='#{new_task_path}']", "タスクを追加"
   end
 
-  test "shows an empty state when the current user has no tasks" do
+  test "自分のタスクがない場合に空状態を表示する" do
     get tasks_path
 
     assert_response :success
@@ -37,7 +37,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.task-list__add-button[href='#{new_task_path}']", "タスクを追加"
   end
 
-  test "creates a trimmed task for the current user and redirects to the list" do
+  test "前後の空白を除いたタスクを作成して一覧へ遷移する" do
     assert_difference("@user.tasks.count", 1) do
       post tasks_path, params: { task: { name: "  肩を10秒伸ばす  " } }
     end
@@ -46,7 +46,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to tasks_path
   end
 
-  test "renders the task form with a link back to the list" do
+  test "タスク登録フォームと一覧へ戻るリンクを表示する" do
     get new_task_path
 
     assert_response :success
@@ -58,7 +58,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_no_match "登録成功後は自分のタスク一覧へ", response.body
   end
 
-  test "rejects a blank task name and shows a flash error" do
+  test "タスク名が空欄の場合は登録せずエラーを表示する" do
     assert_no_difference("@user.tasks.count") do
       post tasks_path, params: { task: { name: "   " } }
     end
@@ -67,7 +67,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", "空欄では登録できません"
   end
 
-  test "rejects task names longer than 100 characters" do
+  test "100文字を超えるタスク名は登録できない" do
     assert_no_difference("@user.tasks.count") do
       post tasks_path, params: { task: { name: "a" * 101 } }
     end
@@ -76,7 +76,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", "タスク名は100文字以内で入力してください"
   end
 
-  test "redirects unauthenticated visitors to login" do
+  test "未ログインの場合はログイン画面へ遷移する" do
     delete logout_path
 
     get tasks_path
