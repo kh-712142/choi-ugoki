@@ -6,7 +6,7 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
     post login_path, params: { email: @user.email, password: "password123" }
   end
 
-  test "counts this week's records Monday through Sunday and lists newest dates first" do
+  test "今週（月曜から日曜）の達成回数を数え、日付の新しい順に履歴を表示する" do
     travel_to Time.zone.local(2026, 11, 11, 12)
     task = Task.create!(user: nil, name: "今週のタスク")
     previous_week_task = Task.create!(user: nil, name: "先週のタスク")
@@ -39,7 +39,7 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
     travel_back
   end
 
-  test "shows only the five newest completions for each date" do
+  test "各日の新しい達成記録を5件まで表示する" do
     travel_to Time.zone.local(2026, 11, 14, 12)
     7.times do |index|
       task = Task.create!(user: nil, name: "達成タスク#{index}")
@@ -63,7 +63,7 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
     travel_back
   end
 
-  test "shows separate empty states when no completions exist" do
+  test "達成記録がない場合はそれぞれ空状態を表示する" do
     get history_path
 
     assert_response :success
@@ -72,7 +72,7 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".completion-history__item", 0
   end
 
-  test "requires login" do
+  test "未ログインの場合はログイン画面へ遷移する" do
     delete logout_path
 
     get history_path

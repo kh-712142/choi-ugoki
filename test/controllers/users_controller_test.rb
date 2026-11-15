@@ -1,7 +1,7 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  test "renders the registration form" do
+  test "ユーザー登録フォームを表示する" do
     get new_user_path
 
     assert_response :success
@@ -15,7 +15,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{login_path}']", "ログインに戻る"
   end
 
-  test "creates a user, signs them in, and redirects to the home page" do
+  test "ユーザーを作成してログイン状態にし、トップ画面へ遷移する" do
     assert_difference("User.count", 1) do
       post users_path, params: {
         user: {
@@ -31,7 +31,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "renders errors when registration is invalid" do
+  test "登録内容が不正な場合はエラーを表示する" do
     assert_no_difference("User.count") do
       post users_path, params: {
         user: {

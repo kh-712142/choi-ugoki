@@ -9,7 +9,7 @@ class TaskCompletionsControllerTest < ActionDispatch::IntegrationTest
     post login_path, params: { email: @user.email, password: "password123" }
   end
 
-  test "records each completion for the current recommendation using today's server date" do
+  test "現在のおすすめをサーバー上の今日の日付で達成記録に保存する" do
     next_task = Task.create!(user_id: nil, name: "次のおすすめ")
     first_task = @user.recommended_task_for
     following_task = @user.alternative_recommendation_tasks.first
@@ -38,7 +38,7 @@ class TaskCompletionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal first_task.id, @user.reload.daily_recommendation_task_id
   end
 
-  test "allows completing the same task again after selecting it again" do
+  test "選び直したタスクを同じ日に再度達成できる" do
     next_task = Task.create!(user_id: nil, name: "次のおすすめ")
     post daily_recommendation_path, params: { task_id: @recommended_task.id }
 
@@ -52,7 +52,7 @@ class TaskCompletionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal next_task.id, @user.reload.daily_recommendation_task_id
   end
 
-  test "counts today's completions across different tasks" do
+  test "異なるタスクの今日の達成回数を合算する" do
     another_default_task = Task.create!(user_id: nil, name: "別の標準タスク")
     @user.task_completions.create!(task: another_default_task, completed_on: Date.current)
 
@@ -64,7 +64,7 @@ class TaskCompletionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, @user.task_completions.where(completed_on: Date.current).count
   end
 
-  test "does not create a completion for an unavailable task when there is no recommendation" do
+  test "おすすめがない場合は達成記録を作成しない" do
     Task.default_tasks.delete_all
     @recommended_task.destroy!
 
@@ -75,7 +75,7 @@ class TaskCompletionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "requires login to record a completion" do
+  test "未ログインでは達成記録を作成できない" do
     task = @user.tasks.create!(name: "本人のタスク")
     delete logout_path
 

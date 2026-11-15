@@ -1,7 +1,7 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  test "renders the login form and registration link" do
+  test "ログインフォームと新規登録リンクを表示する" do
     get login_path
 
     assert_response :success
@@ -18,7 +18,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "header.site-header form[action='#{logout_path}']", count: 0
   end
 
-  test "authenticates the user and starts a session" do
+  test "ログインに成功するとセッションを開始する" do
     user = User.create!(email: "login@example.com", password: "password123")
 
     post login_path, params: { email: "LOGIN@example.com", password: "password123" }
@@ -27,7 +27,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "shows the logout action in the shared header when logged in" do
+  test "ログイン中は共通ヘッダーにログアウト操作を表示する" do
     user = User.create!(email: "header@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
 
@@ -41,7 +41,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "header.site-header form[action='#{logout_path}']"
   end
 
-  test "shows a generic error for invalid credentials" do
+  test "認証情報が違う場合は共通エラーを表示する" do
     post login_path, params: { email: "missing@example.com", password: "wrongpassword" }
 
     assert_response :unprocessable_entity
@@ -49,7 +49,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_nil session[:user_id]
   end
 
-  test "logs out and clears the session" do
+  test "ログアウトするとセッションを終了する" do
     user = User.create!(email: "logout@example.com", password: "password123")
     post login_path, params: { email: user.email, password: "password123" }
 
@@ -59,7 +59,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
-  test "redirects unauthenticated visitors to the login page" do
+  test "未ログインの場合はログイン画面へ遷移する" do
     get root_path
 
     assert_redirected_to login_path
