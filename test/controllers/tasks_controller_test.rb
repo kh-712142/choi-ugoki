@@ -16,6 +16,9 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     get tasks_path
 
     assert_response :success
+    assert_select "link[href*='/assets/application-']"
+    assert_select "link[href*='/assets/tasks-']"
+    assert_select "link[href*='/assets/home-']", count: 0
     assert_select "h1", "自分のタスク"
     assert_select ".task-list__item", 2
     assert_select ".task-list__item", text: /最初に作成したタスク/
@@ -47,6 +50,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     get new_task_path
 
     assert_response :success
+    assert_select "link[href*='/assets/tasks-']"
     assert_select "h1", "タスクを登録"
     assert_select "input[name='task[name]'][maxlength='100']"
     assert_select "input[placeholder='例：肩を10秒伸ばす']"

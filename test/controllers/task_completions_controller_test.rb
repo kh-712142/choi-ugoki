@@ -21,6 +21,7 @@ class TaskCompletionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     follow_redirect!
     assert_select "dialog[data-completion-dialog]"
+    assert_select "[data-completion-close]", count: 0
     assert_select ".completion-dialog__message", "えらい！この調子で明日もなにか1つ運動してみよう！"
     assert_equal following_task.id, @user.reload.daily_recommendation_task_id
 

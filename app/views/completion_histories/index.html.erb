@@ -1,4 +1,7 @@
 <% content_for :title, t("completion_histories.title") %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "completion_histories", "data-turbo-track": "reload" %>
+<% end %>
 
 <main class="completion-history-page">
   <section class="completion-history" aria-labelledby="completion-history-title">

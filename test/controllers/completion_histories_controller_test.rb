@@ -23,6 +23,9 @@ class CompletionHistoriesControllerTest < ActionDispatch::IntegrationTest
     get history_path
 
     assert_response :success
+    assert_select "link[href*='/assets/application-']"
+    assert_select "link[href*='/assets/completion_histories-']"
+    assert_select "link[href*='/assets/home-']", count: 0
     assert_select "h1", "達成履歴"
     assert_select ".weekly-completion-count", "今週できた回数：3回"
     assert_select ".completion-history__item", 5

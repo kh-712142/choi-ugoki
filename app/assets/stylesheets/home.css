@@ -1,0 +1,309 @@
+.home-page {
+	display: block;
+	flex: 1;
+	width: min(100%, 1120px);
+	margin: 0 auto;
+	padding: 24px 24px 48px;
+}
+
+.home-page__intro {
+	width: 100%;
+}
+
+.home-page h1 {
+	margin-bottom: 24px;
+	color: #202b40;
+	font-size: 2rem;
+	font-weight: 800;
+}
+
+.home-page__recommendation h2,
+.home-page__daily-achievements h2 {
+	margin: 0 0 12px;
+	color: #3f4a5d;
+	font-size: 1.15rem;
+	font-weight: 500;
+}
+
+.home-page__recommendation-card,
+.home-page__empty {
+	padding: 24px;
+	border: 2px solid #dfe4ec;
+	border-radius: 12px;
+	background: #fff;
+	color: #25324a;
+	box-shadow: 0 1px 2px rgb(37 50 74 / 4%);
+}
+
+.home-page__recommendation-name {
+	margin: 0 0 12px;
+	font-size: 1.35rem;
+	font-weight: 800;
+}
+
+.home-page__recommendation-caption {
+	margin-bottom: 0;
+	color: #68758a;
+}
+
+.home-page__complete-button {
+	width: 100%;
+	min-height: 58px;
+	margin-top: 12px;
+	border: 2px solid #7a8494;
+	border-radius: 8px;
+	background: #f9fafc;
+	color: #25324a;
+	font: inherit;
+	font-size: 1.05rem;
+}
+
+.home-page__complete-button:hover {
+	background: #eef1f6;
+}
+
+.home-page__complete-button:focus-visible {
+	outline: 3px solid #9dbcf4;
+	outline-offset: 2px;
+}
+
+.weekly-completion-count {
+	margin: 0 0 28px;
+	padding: 20px 22px;
+	border: 2px solid #dfe4ec;
+	border-radius: 12px;
+	background: #fff;
+	color: #25324a;
+	font-size: 1.1rem;
+}
+
+.home-page__daily-achievements {
+	margin-top: 28px;
+}
+
+.home-page__daily-achievements h2 {
+	margin-bottom: 16px;
+}
+
+.home-page__daily-achievement-list {
+	display: grid;
+	gap: 14px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.home-page__daily-achievement,
+.home-page__daily-empty {
+	margin: 0;
+	padding: 18px 22px;
+	border: 2px solid #dfe4ec;
+	border-radius: 12px;
+	background: #fff;
+	color: #25324a;
+}
+
+.home-page__daily-achievement {
+	display: grid;
+	gap: 4px;
+}
+
+.home-page__daily-achievement-name {
+	font-size: 1.05rem;
+	font-weight: 700;
+	overflow-wrap: anywhere;
+}
+
+.home-page__daily-achievement-status,
+.home-page__daily-empty {
+	color: #68758a;
+}
+
+.home-page__empty {
+	margin: 0;
+	color: #68758a;
+}
+
+.recommendation-picker {
+	margin-top: 20px;
+}
+
+.recommendation-picker__open,
+.recommendation-dialog__next,
+.recommendation-dialog__choose {
+	display: grid;
+	width: 100%;
+	min-height: 54px;
+	place-items: center;
+	border: 2px solid #7a8494;
+	border-radius: 8px;
+	background: #f9fafc;
+	color: #25324a;
+	font: inherit;
+	font-size: 1.05rem;
+}
+
+.recommendation-picker__open:hover,
+.recommendation-dialog__next:hover {
+	background: #eef1f6;
+}
+
+.recommendation-picker__open:focus-visible,
+.recommendation-dialog__next:focus-visible,
+.recommendation-dialog__choose:focus-visible,
+.recommendation-dialog__close:focus-visible,
+.recommendation-dialog__candidate:focus-within {
+	outline: 3px solid #9dbcf4;
+	outline-offset: 2px;
+}
+
+.recommendation-picker__open:disabled {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+.recommendation-dialog,
+.completion-dialog {
+	width: min(100% - 32px, 560px);
+	max-width: 560px;
+	padding: 0;
+	border: 1px solid #d5deef;
+	border-radius: 12px;
+	background: #f1f5fb;
+	color: #25324a;
+	box-shadow: 0 16px 48px rgb(22 34 56 / 24%);
+}
+
+.recommendation-dialog {
+	max-height: min(80vh, 720px);
+}
+
+.recommendation-dialog::backdrop,
+.completion-dialog::backdrop {
+	background: rgb(25 37 58 / 48%);
+}
+
+.recommendation-dialog__panel {
+	padding: 20px;
+}
+
+.recommendation-dialog__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.recommendation-dialog__header h3 {
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 800;
+}
+
+.recommendation-dialog__close {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #aab8ca;
+	border-radius: 6px;
+	background: #fff;
+	color: #25324a;
+	font-size: 1.5rem;
+}
+
+.recommendation-dialog__form {
+	display: grid;
+	gap: 16px;
+}
+
+.recommendation-dialog__candidates {
+	display: grid;
+	max-height: 48vh;
+	gap: 10px;
+	overflow-y: auto;
+}
+
+.recommendation-dialog__candidate {
+	display: flex;
+	min-height: 58px;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 16px;
+	border: 2px solid #dfe4ec;
+	border-radius: 8px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.recommendation-dialog__radio {
+	width: 20px;
+	height: 20px;
+	flex: 0 0 auto;
+	accent-color: #3974b8;
+}
+
+.recommendation-dialog__candidate:has(.recommendation-dialog__radio:checked) {
+	border-color: #6f98eb;
+	background: #e6effd;
+}
+
+.recommendation-dialog__actions {
+	display: grid;
+	gap: 10px;
+}
+
+.recommendation-dialog__choose {
+	border-color: #6f98eb;
+	background: #dce9fc;
+}
+
+.recommendation-dialog__choose:hover:not(:disabled) {
+	background: #cadcf8;
+}
+
+.recommendation-dialog__choose:disabled {
+	border-color: #c5cad3;
+	background: #e6e8ed;
+	color: #707888;
+	cursor: not-allowed;
+}
+
+.recommendation-dialog__empty {
+	margin: 0;
+	padding: 18px;
+	border-radius: 8px;
+	background: #fff;
+	color: #68758a;
+}
+
+.completion-dialog {
+	max-width: 480px;
+}
+
+.completion-dialog__panel {
+	position: relative;
+	padding: 36px 28px;
+	text-align: center;
+}
+
+.completion-dialog__message {
+	margin: 0;
+	font-size: 1.15rem;
+	font-weight: 700;
+	line-height: 1.7;
+}
+
+@media (max-width: 576px) {
+	.home-page {
+		padding: 24px 20px 36px;
+	}
+
+	.home-page__recommendation-card,
+	.home-page__empty {
+		padding: 20px;
+	}
+
+	.recommendation-dialog__panel {
+		padding: 16px;
+	}
+}

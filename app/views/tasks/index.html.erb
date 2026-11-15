@@ -1,4 +1,7 @@
 <% content_for :title, t("tasks.index.title") %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "tasks", "data-turbo-track": "reload" %>
+<% end %>
 
 <main class="task-list-page">
   <section class="task-list" aria-labelledby="task-list-title">

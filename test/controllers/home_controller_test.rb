@@ -16,6 +16,9 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_path
 
     assert_response :success
+    assert_select "link[href*='/assets/application-']"
+    assert_select "link[href*='/assets/home-']"
+    assert_select "link[href*='/assets/tasks-']", count: 0
     assert_select "h1", "今日の小さな運動"
     assert_select "h2", "今日のおすすめ"
     assert_select ".home-page__recommendation-name", Task.daily_recommendation.name
