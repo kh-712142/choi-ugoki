@@ -5,6 +5,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get login_path
 
     assert_response :success
+    assert_select "link[href*='/assets/application-']"
+    assert_select "link[href*='/assets/sessions-']"
+    assert_select "link[href*='/assets/users-']", count: 0
     assert_select "h1", "ログイン"
     assert_select "input[type=email][name='email']"
     assert_select "input[type=password][name='password']"

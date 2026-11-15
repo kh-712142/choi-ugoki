@@ -1,0 +1,38 @@
+.registration-page {
+	display: grid;
+	flex: 1;
+	place-items: center;
+	padding: 48px 24px;
+	background: #f1f5fb;
+}
+
+.registration-panel {
+	width: min(100%, 520px);
+	padding: 40px 32px;
+	border-left: 4px solid #78a8e8;
+	background: #fff;
+}
+
+.registration-panel h1 {
+	margin-bottom: 12px;
+	font-size: 2rem;
+	font-weight: 800;
+}
+
+.registration-panel__description {
+	margin-bottom: 28px;
+	color: var(--color-muted);
+}
+
+.registration-panel__eyebrow {
+	margin-bottom: 8px;
+	color: #3974b8;
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+@media (max-width: 576px) {
+	.registration-panel {
+		padding: 32px 24px;
+	}
+}

@@ -5,6 +5,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get new_user_path
 
     assert_response :success
+    assert_select "link[href*='/assets/application-']"
+    assert_select "link[href*='/assets/users-']"
+    assert_select "link[href*='/assets/sessions-']", count: 0
     assert_select "h1", "アカウント新規登録"
     assert_select "input[type=email][name='user[email]']"
     assert_select "input[type=password][name='user[password]']"

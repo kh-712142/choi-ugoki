@@ -1,5 +1,6 @@
 <% content_for :title, t("app.name") %>
 <% content_for :head do %>
+  <%= stylesheet_link_tag "home", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "recommendation_picker", defer: true %>
 <% end %>
 

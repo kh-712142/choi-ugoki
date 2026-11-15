@@ -1,4 +1,7 @@
 <% content_for :title, t("sessions.new.title") %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "sessions", "data-turbo-track": "reload" %>
+<% end %>
 
 <main class="login-page">
   <section class="login-panel" aria-labelledby="login-title">
