@@ -80,7 +80,6 @@
   <% if @completion_count.present? %>
     <dialog class="completion-dialog" data-completion-dialog data-completion-count="<%= @completion_count %>" aria-labelledby="completion-dialog-title">
       <div class="completion-dialog__panel">
-        <button class="completion-dialog__close" type="button" data-completion-close aria-label="<%= t("home.close_completion_message") %>">×</button>
         <p id="completion-dialog-title" class="completion-dialog__message">
           <% if @completion_count.to_i >= 2 %>
             <%= t("home.completion_many", count: @completion_count) %>

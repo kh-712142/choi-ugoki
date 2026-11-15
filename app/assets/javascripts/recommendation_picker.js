@@ -6,8 +6,6 @@
       if (dialog.dataset.initialized === "true") return;
       dialog.dataset.initialized = "true";
 
-      const closeButton = dialog.querySelector("[data-completion-close]");
-      closeButton.addEventListener("click", () => dialog.close());
       dialog.addEventListener("click", (event) => {
         if (event.target === dialog) dialog.close();
       });
